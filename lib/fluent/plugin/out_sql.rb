@@ -72,7 +72,7 @@ module Fluent::Plugin
           self.inheritance_column = '_never_use_output_'
         end
 
-        class_name = table_name.singularize.camelize
+        class_name = table_name.gsub(/\./, "_").singularize.camelize
         base_model.const_set(class_name, @model)
         model_name = ActiveModel::Name.new(@model, nil, class_name)
         @model.define_singleton_method(:model_name) { model_name }
